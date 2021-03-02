@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 	
 	@PersistenceContext
-	EntityManager manager;
+	EntityManager manager;		
 	
 	@PostMapping
 	@Transactional
-	public String criarUsuarios(@RequestBody @Valid UsuarioRequest usuarioRequest) {
+	public ResponseEntity<?> criarUsuarios(@RequestBody @Valid UsuarioRequest usuarioRequest) {
 		
 		Usuario usuario = usuarioRequest.toModel();
-		manager.persist(usuario);
 		
-		return usuario.toString();
+		if(usuario != null) {
+			
+			manager.persist(usuario);
+			return ResponseEntity.ok().build();
+		}
+		
+		return ResponseEntity.badRequest().build();
 
 	}
 }
