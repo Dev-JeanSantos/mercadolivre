@@ -1,8 +1,13 @@
 package br.com.zup.mercadolivre.usuario;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 import br.com.zup.mercadolivre.handler.exceptions.validations.UniqueValue;
 
@@ -16,9 +21,11 @@ public class UsuarioRequest {
 	@Size(min = 6, message = "O minimo de caracteres da senha é de 6 digitos")
 	private String senha;
 	
-	public UsuarioRequest(@Email @NotBlank String email, 
-			@NotBlank @Size(min = 6) String senha) {
-		super();
+	@NotNull
+    private LocalDateTime dataInscricao = LocalDateTime.now(Clock.systemDefaultZone());
+
+	public UsuarioRequest(@Email @NotBlank String email,@NotBlank @Size(min = 6) String senha) {
+
 		this.email = email;
 		this.senha = senha;
 	}

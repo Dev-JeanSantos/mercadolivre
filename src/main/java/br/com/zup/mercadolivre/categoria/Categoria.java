@@ -24,9 +24,9 @@ public class Categoria {
     private Categoria categoria;
 
     @Deprecated
-    private Categoria() {
+    public Categoria() {
     }
-
+    
     public Categoria(@NotBlank String nome) {
         this.nome = nome;
     }

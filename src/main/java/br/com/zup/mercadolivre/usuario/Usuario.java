@@ -1,21 +1,23 @@
 package br.com.zup.mercadolivre.usuario;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 @Entity
+@Table(name = "usuario", uniqueConstraints = {@UniqueConstraint(columnNames = {"email","id"})})
 public class Usuario {
 
 	@Id
@@ -23,8 +25,8 @@ public class Usuario {
 	private Long id;
 	private @Email @NotBlank String email;
 	private @NotBlank @Size String senha;
-	private @NotNull @PastOrPresent LocalDate dataInscricao = LocalDate.now();
-	
+	private LocalDateTime dataInscricao = LocalDateTime.now(ZoneId.systemDefault());
+
 	
 	@Deprecated
 	public Usuario() {
@@ -49,17 +51,16 @@ public class Usuario {
 				this.senha = senhaLimpa.hash();
 	}
 
-	public Long getId() {
-		return id;
+	public String getEmail() {
+		return email;
 	}
 
-	public LocalDate getDataInscricao() {
-		return dataInscricao;
+	public String getSenha() {
+		return senha;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", dataInscricao=" + dataInscricao + "]";
-	}
-	
+	}	
 }
