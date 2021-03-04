@@ -1,4 +1,4 @@
-package br.com.zup.mercadolivre.usuarioControllerTest;
+package br.com.zup.mercadolivre.usuarioTest;
 
 import javax.persistence.EntityManager;
 

@@ -5,12 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "categoria", uniqueConstraints = {@UniqueConstraint(columnNames = {"nome", "id"})})
 public class Categoria {
 	
 	@Id
@@ -34,8 +31,12 @@ public class Categoria {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+    
+    public Long getId() {
+		return id;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Categoria{" +
                 "id=" + id +
