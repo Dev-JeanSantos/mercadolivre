@@ -20,9 +20,6 @@ public class UsuarioRequest {
 	@NotBlank(message = "O campo email não deve ser vazio")
 	@Size(min = 6, message = "O minimo de caracteres da senha é de 6 digitos")
 	private String senha;
-	
-	@NotNull
-    private LocalDateTime dataInscricao = LocalDateTime.now(Clock.systemDefaultZone());
 
 	public UsuarioRequest(@Email @NotBlank String email,@NotBlank @Size(min = 6) String senha) {
 

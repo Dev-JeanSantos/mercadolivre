@@ -53,7 +53,14 @@ public class Produto {
 	@Valid
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
-
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens = new HashSet<>();
+	
+	@Deprecated
+	public Produto() {
+		
+	}
+	
 	public Produto(@NotBlank String nome, @PositiveOrZero int quantidade, @Positive BigDecimal valor,
 			@NotBlank @Length(max = 1000) String descricao, @NotNull @Valid Categoria categoria,
 			@NotNull @Valid Usuario usuario, 
@@ -71,14 +78,6 @@ public class Produto {
 		Assert.isTrue(this.caracteristicas.size() >= 3, "Cadastre no minimo 3 caracteristicas");
 		
 	}
-
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", quantidade=" + quantidade + ", valor=" + valor
-				+ ", descricao=" + descricao + ", categoria=" + categoria + ", usuario=" + usuario
-				+ ", caracteristicas=" + caracteristicas + "]";
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -126,5 +125,25 @@ public class Produto {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}	
+	}
+
+	public void associaProdutos(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream().map(link -> new ImagemProduto(this, link))
+			.collect(Collectors.toSet());
+		this.imagens.addAll(imagens);
+	}
+	
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nome=" + nome + ", quantidade=" + quantidade + ", valor=" + valor
+				+ ", descricao=" + descricao + ", categoria=" + categoria + ", usuario=" + usuario
+				+ ", caracteristicas=" + caracteristicas + ", imagens=" + imagens + "]";
+	}
+
+	public boolean pertenceAoUsuario(Usuario possivelUsuario) {
+		
+		return this.usuario.equals(possivelUsuario);
+	}
+	
+	
 }

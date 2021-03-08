@@ -51,7 +51,7 @@ public class UsuarioControllerTeste {
 
 	@Test
 	@WithMockUser
-	@DisplayName("DeveriaReconhecerDuplicacaoDeEmailERetornarStautus404")
+	@DisplayName("DeveriaReconhecerDuplicacaoDeEmailERetornarStatus400")
 	@Transactional
 	public void emailDuplicadoTeste() throws Exception {
 
@@ -62,7 +62,7 @@ public class UsuarioControllerTeste {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/usuarios").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON).content(req))
-				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.status().is(400))
                 .andDo(MockMvcResultHandlers.print());
 	}
 

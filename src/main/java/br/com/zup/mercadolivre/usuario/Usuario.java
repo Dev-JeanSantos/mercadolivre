@@ -64,4 +64,8 @@ public class Usuario {
 		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", dataInscricao=" + dataInscricao + "]";
 	}
 
+	public Usuario get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -20,15 +20,21 @@ public class CaracteristicaProduto {
 	@NotNull
 	private String nome;
 	@NotNull
-	private String descrição;
+	private String descricao;
 	@NotNull @Valid
 	@ManyToOne
 	private Produto produto;
 	
-	public CaracteristicaProduto(String nome, String descrição, @Valid Produto produto) {
+	@Deprecated	
+	public CaracteristicaProduto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CaracteristicaProduto(String nome, String descricao, @Valid Produto produto) {
 		super();
 		this.nome = nome;
-		this.descrição = descrição;
+		this.descricao = descricao;
 		this.produto = produto;
 	}
 
@@ -36,7 +42,7 @@ public class CaracteristicaProduto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descrição == null) ? 0 : descrição.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
 		return result;
@@ -51,10 +57,10 @@ public class CaracteristicaProduto {
 		if (getClass() != obj.getClass())
 			return false;
 		CaracteristicaProduto other = (CaracteristicaProduto) obj;
-		if (descrição == null) {
-			if (other.descrição != null)
+		if (descricao == null) {
+			if (other.descricao != null)
 				return false;
-		} else if (!descrição.equals(other.descrição))
+		} else if (!descricao.equals(other.descricao))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -71,7 +77,7 @@ public class CaracteristicaProduto {
 
 	@Override
 	public String toString() {
-		return "CaracteristicaProduto [nome=" + nome + ", descrição=" + descrição + "]";
+		return "CaracteristicaProduto [nome=" + nome + ", descrição=" + descricao + "]";
 	}	
 	
 }
