@@ -29,6 +29,7 @@ import org.springframework.util.Assert;
 import com.sun.istack.NotNull;
 
 import br.com.zup.mercadolivre.categoria.Categoria;
+import br.com.zup.mercadolivre.opiniao.Opiniao;
 import br.com.zup.mercadolivre.perguntas.Pergunta;
 import br.com.zup.mercadolivre.produto.caracteristica.CaracteristicaProduto;
 import br.com.zup.mercadolivre.produto.caracteristica.CaracteristicaRequest;
@@ -63,6 +64,8 @@ public class Produto {
 	@OneToMany(mappedBy = "produto")
 	@OrderBy("titulo asc")
 	private SortedSet<Pergunta> perguntas = new TreeSet<>();
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<Opiniao> opinioes = new HashSet<>();
 	
 	@Deprecated
 	public Produto() {
@@ -176,6 +179,11 @@ public class Produto {
 		return this.perguntas.stream().map(funcaoMapeaPergunta).
 				collect(Collectors.toCollection(TreeSet::new));
 	}
-	
-	
+
+	public <T> Set<T> mapeiaOpinioes(
+			Function<Opiniao, T> funcaoMapeaOpiniao){
+		
+		return this.opinioes.stream().map(funcaoMapeaOpiniao).
+				collect(Collectors.toSet());
+	}	
 }
