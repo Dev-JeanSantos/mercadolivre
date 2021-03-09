@@ -58,7 +58,7 @@ public class Usuario {
 	public String getSenha() {
 		return senha;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", dataInscricao=" + dataInscricao + "]";

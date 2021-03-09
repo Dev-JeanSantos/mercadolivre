@@ -185,5 +185,17 @@ public class Produto {
 		
 		return this.opinioes.stream().map(funcaoMapeaOpiniao).
 				collect(Collectors.toSet());
+	}
+
+	public boolean abateEstoque(@Positive int quantidade) {
+	
+		Assert.isTrue(quantidade > 0, "A quantidade deve ser maior que zero para ocorrer decremento no estoque" + quantidade);
+		if(quantidade <= this.quantidade) {
+			this.quantidade -= quantidade;
+			
+			return true;
+		}
+		
+		return false;
 	}	
 }

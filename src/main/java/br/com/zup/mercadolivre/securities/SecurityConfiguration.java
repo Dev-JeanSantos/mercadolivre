@@ -57,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .antMatchers(HttpMethod.POST, "/produtos/{id:[0-9]+}/opinioes").permitAll()
                 .antMatchers(HttpMethod.POST, "/produtos/{id:[0-9]+}/perguntas").permitAll()
                 .antMatchers("/usuarios").permitAll()
+                .antMatchers("/compras").permitAll()
                 .antMatchers("/produtos").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/mercadolivre/categorias").permitAll()
