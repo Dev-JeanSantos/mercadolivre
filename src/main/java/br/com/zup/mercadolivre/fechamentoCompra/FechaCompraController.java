@@ -44,7 +44,7 @@ public class FechaCompraController {
 			
 			manager.persist(novaCompra);
 			
-			if(gateway.equals(Gateway.pagSeguro)) {
+			if(gateway.equals(Gateway.PAGSEGURO)) {
 				
 				UriComponents urlPagSeguro = uriComponentsBuilder.path("/retorno-pagseguro/{id}").
 					buildAndExpand(novaCompra.getId().toString());

@@ -35,7 +35,11 @@ public class Compra {
 	@Enumerated
 	private Gateway gateway;
 	
-	
+	@Deprecated
+	public Compra() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Compra(@NotNull @Valid Produto produtoComprado, 
 			@Positive @Valid int quantidade, @NotNull @Valid Usuario usuarioComprador,@Valid Gateway gateway) {

@@ -6,7 +6,7 @@ insert into categoria (nome) values ( 'tecnologia');
 insert into categoria (nome, categoria_id) values ( 'Celular', 1);
 insert into categoria (nome, categoria_id) values ( 'Galaxy One', 2);
 
-insert into produto (nome, quantidade, valor, descricao, categoria_id, usuario_id) values ( 'Iphone PLUS', 10, 1000.00, 'Excelente Aparelho', 1, 1);
+insert into produto (nome, quantidade, valor, descricao, categoria_id, usuario_id) values ( 'Iphone PLUS', 50, 1000.00, 'Excelente Aparelho', 1, 1);
 insert into produto (nome, quantidade, valor, descricao, categoria_id, usuario_id) values ( 'TV LED', 12, 1400.00, 'MELHOR EM ALTA DEFINIÇÃO', 2, 2);
 insert into produto (nome, quantidade, valor, descricao, categoria_id, usuario_id) values ( 'PS5', 1, 3000.00, 'A MELHOR EXPERIENCIA EM JOGOS', 2, 1);
 
