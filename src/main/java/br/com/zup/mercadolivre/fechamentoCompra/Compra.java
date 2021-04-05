@@ -67,16 +67,20 @@ public class Compra {
 		return id;
 	}
 	
-	public void adicionaTransacao(@Valid RetornoPagSeguroRequest request) {
+	public void adicionaTransacao(@Valid RetornoGatewayPagamento request) {
 		
 		Transacao novaTransacao = request.toTransacao(this);
-		Assert.isTrue(!this.transacoes.contains(novaTransacao), "Transação já existente " + novaTransacao);
-		
+		Assert.isTrue(!this.transacoes.contains(novaTransacao), "Transação já existente " + novaTransacao);		
+		Assert.isTrue(transacoesConcluidaComSucesso().isEmpty(), "Compra Concluida com sucesso ");
+		this.transacoes.add(novaTransacao);
+	}
+
+	private Set<Transacao> transacoesConcluidaComSucesso() {
 		Set<Transacao> transacoesConcluidasComSucesso = this.transacoes.stream().
 				filter(Transacao :: concluidaComSucesso).collect(Collectors.toSet());
 		
-		Assert.isTrue(transacoesConcluidasComSucesso.isEmpty(), "Compra Concluida com sucesso ");
-		this.transacoes.add(novaTransacao);
+		Assert.isTrue(transacoesConcluidasComSucesso.size() <= 1, "Nunca pode ser maior que 1 " + this.getId());
+		return transacoesConcluidasComSucesso;
 	}
 
 	@Override
@@ -84,5 +88,20 @@ public class Compra {
 		return "Compra [id=" + id + ", produtoComprado=" + produtoComprado + ", quantidade=" + quantidade
 				+ ", usuarioComprador=" + usuarioComprador + ", gateway=" + gateway + ", transacoes=" + transacoes
 				+ "]";
+	}
+
+	public boolean processadaComSucesso() {
+		// TODO Auto-generated method stub
+		return !transacoesConcluidaComSucesso().isEmpty();
+	}
+
+	public Usuario getComprador() {
+		// TODO Auto-generated method stub
+		return usuarioComprador;
+	}
+
+	public Usuario getDonoProduto() {
+		// TODO Auto-generated method stub
+		return produtoComprado.getUsuario();
 	}
 }

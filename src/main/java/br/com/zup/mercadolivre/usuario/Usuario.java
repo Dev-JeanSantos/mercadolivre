@@ -93,4 +93,8 @@ public class Usuario {
 			return false;
 		return true;
 	}
+
+	public Long getId() {
+		return id;
+	}
 }

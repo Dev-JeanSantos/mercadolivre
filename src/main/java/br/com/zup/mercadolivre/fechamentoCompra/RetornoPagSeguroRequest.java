@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
-public class RetornoPagSeguroRequest {
+public class RetornoPagSeguroRequest implements RetornoGatewayPagamento{
 	@NotBlank
 	private String idTransacao;
 	@NotNull
